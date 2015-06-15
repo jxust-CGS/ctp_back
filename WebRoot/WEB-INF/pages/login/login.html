@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>学海泛舟后台管理系统</title>
+
+<link href="${ctx!}/static/dwz/themes/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div id="login">
+		<div id="login_header">
+			<h1 class="login_logo">
+				<a href="http://demo.dwzjs.com"><img src="${ctx!}/static/dwz/themes/default/images/login_logo.gif" width="250" height="50"/></a>
+			</h1>
+			<div class="login_headerContent">
+				<p style="text-align:center; line-height:90px; font-size: 20px;"><b>欢迎登陆后台管理系统</b></p>
+			</div>
+		</div>
+		<div id="login_content">
+			<div class="loginForm" style="background-color: white;">
+				<form action="${ctx}/login/login" method="post">
+					<p>
+						<label>用户名：</label>
+						<input type="text" name="username" size="20" class="login_input"/>
+					</p>
+					<p>
+						<label>密码：</label>
+						<input type="password" name="password" size="20" class="login_input" />
+					</p>
+					<p>
+						<label>验证码：</label>
+						<input class="code" name="code" type="text" size="5" />
+						<span>
+						<img src="${ctx}/login/jpg" id="codeimg"
+						onclick="this.src='${ctx}/login/jpg?id='+Math.random()*10"
+						title="点击更新验证码" width="75" height="24" style="vertical-align:baseline"/>
+						</span>
+					</p>
+					<div class="login_bar" align="right">
+						<input class="sub" type="submit" value="" />
+					</div>
+				</form>
+				<#if sign??>
+						<p style="color: red; font-size: 15px;">${sign!}</p>
+				</#if>
+				<br><br><br><br><br><br><br><br><br>
+			</div>
+			<div class="login_banner"><img src="${ctx!}/static/dwz/themes/default/images/login_banner.jpg" width="1000" height="270"/></div>
+			<div class="login_main">
+			</div>
+		</div>
+		<div id="login_footer">
+			Copyright &copy; 2015 江西理工大学 陈光送. All Rights Reserved.
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<table class="searchContent" style="width: 800px;">
+<tr>			
+	<td style="width: 150px;text-align: right;">题目名：</td>
+	<td><input name="problem_judge.title" class="" type="text" size="30" value="${(problem_judge.title)!}" disabled="disabled"/></td>
+	<input name="problem_judge.id" type="hidden" value="${(problem_judge.id)!}"/>
+</tr>
+<tr>
+	<td style="width: 150px; text-align: right; vertical-align: top;">题目正文：</td>
+	<td><textarea name="problem_judge.main_body" class="editor" tools="simple" type="text" cols="100" rows="10"  disabled="disabled">${(problem_judge.main_body)!}</textarea></td>
+</tr>
+<tr>
+	<td  style="width: 150px;text-align: right;">答案：</td>
+	<td>
+	<select name="problem_judge.answer" class="" disabled="disabled">
+		<option value="">请选择答案</option>
+		<#if problem_judge?? && problem_judge.answer=='1'>
+		<option value="1" selected="selected">对</option>
+		<#else>
+		<option value="1">对</option>
+		</#if>
+		<#if problem_judge?? && problem_judge.answer=='0'>
+		<option value="0" selected="selected">错</option>
+		<#else>
+		<option value="0">错</option>
+		</#if>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td  style="width: 150px;text-align: right;  vertical-align: top;">答案解析：</td>
+	<td><textarea name="problem_judge.explan" cols="100" rows="3"  disabled="disabled">${(problem_judge.explan)!}</textarea><td>
+</tr>
+</table>

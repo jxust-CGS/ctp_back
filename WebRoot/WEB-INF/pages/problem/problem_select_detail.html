@@ -1,0 +1,43 @@
+<table class="searchContent" style="width: 800px;">
+<tr>			
+	<td style="width: 150px;text-align: right;">题目名：</td>
+	<td><input name="problem_select.title" class="" type="text" size="30" value="${(problem_select.title)!}" disabled="disabled"/></td>
+	<input name="problem_select.id" type="hidden" value="${(problem_select.id)!}"/>
+</tr>
+<tr>
+	<td  style="width: 150px;text-align: right; vertical-align: top;">题目正文：</td>
+	<td><textarea name="problem_select.main_body" class="editor"  tools="simple" type="text" cols="100" rows="10"  disabled="disabled">${(problem_select.main_body)!}</textarea></td>
+</tr>
+<tr>
+	<td  style="width: 150px;text-align: right;">答案：</td>
+	<td>
+	<select name="problem_select.answer" class="" disabled="disabled">
+		<option value="">请选择答案</option>
+		<#if problem_select?? && problem_select.answer=='A'>
+		<option value="A" selected="selected">A</option>
+		<#else>
+		<option value="A">A</option>
+		</#if>
+		<#if problem_select?? && problem_select.answer=='B'>
+		<option value="B" selected="selected">B</option>
+		<#else>
+		<option value="B">B</option>
+		</#if>
+		<#if problem_select?? && problem_select.answer=='C'>
+		<option value="C" selected="selected">C</option>
+		<#else>
+		<option value="C">C</option>
+		</#if>
+		<#if problem_select?? && problem_select.answer=='D'>
+		<option value="D" selected="selected">D</option>
+		<#else>
+		<option value="D">D</option>
+		</#if>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td  style="width: 150px;text-align: right;  vertical-align: top;">答案解析：</td>
+	<td><textarea name="problem_select.explan" cols="100" rows="3"  disabled="disabled">${(problem_select.explan)!}</textarea><td>
+</tr>
+</table>

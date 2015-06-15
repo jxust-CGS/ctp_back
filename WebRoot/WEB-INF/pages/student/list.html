@@ -1,0 +1,86 @@
+﻿<form id="pagerForm" method="post" action="${ctx!}/student/index">
+	<input type="hidden" name="pageNum" value="${page.pageNum!}" />
+	<input type="hidden" name="numPerPage" value="${page.numPerPage!}" />
+</form>
+
+<div class="pageHeader">
+	<form onsubmit="return navTabSearch(this);" action="${ctx!}/student/index" method="post">
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td>
+					姓名：<input type="text" name="fulllname" value=""/>
+				</td>
+				<td>
+					建档日期：<input type="text" class="date" readonly="true" />
+				</td>
+			</tr>
+		</table>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			<a class="add" href="${ctx!}/student/modify" target="dialog" mask="true" rel="editstudent" width="520" height="320"><span>添加</span></a>
+			</li>
+			<li><a class="delete" href="${ctx!}/student/deletes"
+				target="selectedTodo" rel="items" title="确定要将选中的账户全部删除吗?"><span>批量删除</span>
+			</a>
+			</li>
+		</ul>
+	</div>
+	<table class="list" width="100%" layoutH="50">
+
+		<thead>
+			<tr>
+				<th width="100"><input type="checkbox" class="checkboxCtrl"
+					group="items" />选择</th>
+				<th width="100">序号</th>
+				<th>用户名</th>
+				<th width="200">真实姓名</th>
+				<th width="100">Emile</th>
+				<th width="100">qq</th>
+				<th width="100">电话号码</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<#list page.list as x>
+		<tr>
+			<td><input type="checkbox" name="items" value="${x.id}" /></td>
+			<td style="text-align:left;">${x_index+(page.pageSize*(page.pageNumber-1))+1}</td>
+			<td style="text-align:left;">${x.name!}</td>
+			<td style="text-align:left;">${x.fullname!}</td>
+			<td style="text-align:left;">${x.email!}</td>
+			<td style="text-align:left;">${x.qq!}</td>
+			<td style="text-align:left;">${x.phonenumber!}</td>
+			<td>
+			<a class="btnEdit" href="${ctx!}/student/modify?id=${x.id}" target="dialog" title="信息更新" rel="editstudent" mask=true width="520" height="320">编辑</a>
+			<a class="btnDel" href="${ctx!}/student/delete?id=${x.id}" target="ajaxTodo" title="确认删除" >删除</a>
+			</td>
+		</tr>
+		</#list>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span> <select class="combox" name="numPerPage"
+				onchange="navTabPageBreak({numPerPage:this.value})">
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+				<option value="200">200</option>
+			</select> <span>条，${page.totalRow}共条</span>
+		</div>
+
+		<div class="pagination" targetType="navTab" totalCount="200"
+			numPerPage="20" pageNumShown="10" currentPage="1"></div>
+
+	</div>
+</div>

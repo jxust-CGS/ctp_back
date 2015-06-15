@@ -1,0 +1,102 @@
+<h2 class="contentTitle">试卷试题管理</h2>
+
+
+<div class="pageContent" selector="h1" layoutH="40">
+	<div layoutH="50" style="float:left; display:block; overflow:auto; width:700px; border:solid 1px #CCC; background:#fff">
+	<div class="panel collapse" defH="120">
+		<h1>试卷信息</h1>
+		<div>
+			<table>
+			<tr>
+				<td style="width:80px; text-align: right;">试卷名称：</td>
+				<td>
+				<input name="paper.name" class="required" type="text" size="30" value="${(paper.name)!}" disabled="disabled"/>
+				<input name="paper.id" type="hidden" value="${(paper.id)!}"/>
+				</td>
+			</tr>
+			<tr>	
+				<td style="width:80px; text-align: right;">科目：</td>
+				<td><input name="paper.subject" class="required" type="text" size="30" value="${(paper.subject)!}"  disabled="disabled"/></td>
+				<td style="width:120px; text-align: right;">关键词（知识点）：</td>
+				<td><input name="paper.keyword" class="required" type="text" size="30" value="${(paper.keyword)!}"  disabled="disabled"/></td>
+			</tr>
+			<tr>
+				<td style="width:80px; text-align: right;">开考时间：</td>
+				<td>
+				<input name="paper.test_start_time" class="date" type="text" datefmt="yyyy-M-d HH:mm:ss" size="30" value="${(paper.test_start_time)!}"  disabled="disabled"/>
+				</td>
+				<td style="width:120px; text-align: right;">结束时间：</td>
+				<td>
+				<input name="paper.test_end_time" class="date" type="text" datefmt="yyyy-M-d HH:mm:ss" size="30" value="${(paper.test_end_time)!}"  disabled="disabled"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px; text-align: right;">试卷说明：</td>
+				<td colspan="3"><textarea name="paper.explan" class="" type="text" cols="30" rows="3"  disabled="disabled">${(paper.explan)!}</textarea></td>
+			</tr>
+			</table>
+		</div>
+	</div>
+ 	<div class="panel collapse" defH="150">
+		<h1>试题</h1>
+		<div>
+			<div class="panelBar">
+				<ul class="toolBar">
+					<li>
+					<a class="add" href="${ctx!}/paper/modifyPaper_problem?paper_id=${(paper.id)!}" target="dialog" mask="true" rel="editpaper_problem" width="830" height="500"><span>添加</span></a>
+					</li>
+					<li><a class="delete" href="${ctx!}/problem/activations"
+						target="selectedTodo" rel="items" title="确定要将选中的试题全部加入题库吗?"><span>批量入库</span>
+					</a>
+					</li>
+				</ul>
+			</div>
+			<table class="list" width="100%">
+				<thead>
+					<tr>
+						<th width="40"><input type="checkbox" class="checkboxCtrl" group="items"/></th>
+						<th width="40">序号</th>
+						<th width="100">课程</th>
+						<th width="100">关键词</th>
+						<th width="50">分值</th>
+						<th width="80">题型</th>
+						<th width="80">题库可见</th>
+						<th width="100">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<#list paper_problems as x>
+					<tr>
+						<td><input type="checkbox" name="items" value="${x.id}"/></td>
+						<td style="text-align:left;">${x_index+1}</td>
+						<td style="text-align:left;">${x.subject!}</td>
+						<td style="text-align:left;">${x.keyword!}</td>
+						<td style="text-align:left;">${x.value!}</td>
+						<#if x.type=='select'>
+						<td style="text-align:left;">选择题</td>
+						<#else>
+						<td style="text-align:left;">判断题</td>
+						</#if>
+						<#if x.sign=='1'>
+						<td style="text-align:left; color: green;">可见</td>
+						<#else>
+						<td style="text-align:left; color:red;">不可见</td>
+						</#if>
+						<td>
+						<a class="btnEdit" href="${ctx!}/paper/modifyPaper_problem?paper_id=${(paper.id)!}&id=${x.pp_id}" target="dialog" mask="true" rel="editpaper_problem" width="830" height="500" title="信息更新">编辑</a>
+						<a class="btnAdd" href="${ctx!}/paper/delete_problem?id=${x.pp_id}" target="ajaxTodo" title="确认删除" >删除</a>
+						<a class="btnView" href="${ctx!}/problem/viewProblemDetail?id=${x.id}" target="ajax" title="查看题目详情"  rel="jbsxBox_paper_problem_detail">查看</a>
+						<a class="btnAdd" href="${ctx!}/problem/activation?id=${x.id}" target="ajaxTodo" title="确认将试题加入题库" >入库</a>
+						</td>
+					</tr>
+					</#list>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="jbsxBox_paper_problem_detail" class="unitBox" style="margin-left:702px;">
+	<!--#include virtual="list1.html" -->
+</div>
+</div>
+

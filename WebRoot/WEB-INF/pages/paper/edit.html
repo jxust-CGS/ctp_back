@@ -1,0 +1,42 @@
+
+<div class="pageContent">
+	<form method="post" action="${ctx!}/paper/update" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="60">
+			<p>
+				<label>试卷名称：</label>
+				<input name="paper.name" class="required" type="text" size="30" value="${(paper.name)!}"/>
+				<input name="paper.id" type="hidden" value="${(paper.id)!}"/>
+			</p>
+			<p>
+				<label>科目：</label>
+				<input name="paper.subject" class="required" type="text" size="30" value="${(paper.subject)!}"/>
+			</p>
+			<p>
+				<label>关键词（知识点）：</label>
+				<input name="paper.keyword" class="required" type="text" size="30" value="${(paper.keyword)!}"/>
+			</p>
+			<p>
+				<label>开考时间：</label>
+				<input name="paper.test_start_time" class="date" type="text" datefmt="yyyy-M-d HH:mm:ss" size="30" value="${(paper.test_start_time)!}" readonly="readonly"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</p>
+			<p>
+				<label>结束时间：</label>
+				<input name="paper.test_end_time" class="date" type="text" datefmt="yyyy-M-d HH:mm:ss" size="30" value="${(paper.test_end_time)!}" readonly="readonly"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</p>
+			<p>
+				<label>试卷说明：</label>
+				<textarea name="paper.explan" class="" type="text" cols="30" rows="3">${(paper.explan)!}</textarea>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li> 
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

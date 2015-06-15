@@ -1,0 +1,141 @@
+<div class="pageContent">
+	<form method="post" action="${ctx!}/problem/update" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="60">
+			<table class="searchContent">
+			<tr>
+				<td style="width: 150px;text-align: right;">关键词（知识点）：</td>
+				<td style="width: 150px;"><input name="problem.keyword" class="required" type="text" size="30" value="${(problem.keyword)!}"/></td>
+				<input name="problem.id" type="hidden" value="${(problem.id)!}"/>
+				<td style="width: 150px;text-align: right;">科目：</td>
+				<td style="width: 150px;"><input name="problem.subject" class="required" type="text" size="30" value="${(problem.subject)!}"/></td>
+			</tr>
+			<tr>
+				<td style="width: 150px;text-align: right;">题型：</td>
+				<td colspan="3">
+				<select name="problem.type" class="required combox">
+					<option value="">请选择题目类型</option>
+					<#if problem?? && problem.type=='select'>
+					<option value="select" selected="selected">选择题</option>
+					<#else>
+					<option value="select">选择题</option>
+					</#if>
+					<#if problem?? && problem.type=='judge'>
+					<option value="judge" selected="selected">判断题</option>
+					<#else>
+					<option value="judge">判断题</option>
+					</#if>
+				</select>
+				<span style="color: orange;">请确认选择的题型对应下方表单！</span>
+				</td>
+			</tr>
+			</table>
+			<#if problem?? &&  problem.type=='judge'>
+			<div class="tabs" currentIndex="1" eventType="click">
+			<#else>
+			<div class="tabs" currentIndex="0" eventType="click">
+			</#if>
+				<div class="tabsHeader">
+					<div class="tabsHeaderContent">
+						<ul>
+							<li><a href="javascript:;"><span>选择题</span></a></li>
+							<li><a href="javascript:;"><span>判断题</span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="tabsContent">
+					<div>
+						<table class="searchContent">
+						<tr>			
+							<td style="width: 150px;text-align: right;">题目名：</td>
+							<td><input name="problem_select.title" class="" type="text" size="30" value="${(problem_select.title)!}"/></td>
+							<input name="problem_select.id" type="hidden" value="${(problem_select.id)!}"/>
+						</tr>
+						<tr>
+							<td  style="width: 150px;text-align: right; vertical-align: top;">题目正文：</td>
+							<td><textarea name="problem_select.main_body" class="editor"  tools="simple" type="text" cols="100" rows="10">${(problem_select.main_body)!}</textarea></td>
+						</tr>
+						<tr>
+							<td  style="width: 150px;text-align: right;">答案：</td>
+							<td>
+							<select name="problem_select.answer" class=" combox">
+								<option value="">请选择答案</option>
+								<#if problem_select?? && problem_select.answer=='A'>
+								<option value="A" selected="selected">A</option>
+								<#else>
+								<option value="A">A</option>
+								</#if>
+								<#if problem_select?? && problem_select.answer=='B'>
+								<option value="B" selected="selected">B</option>
+								<#else>
+								<option value="B">B</option>
+								</#if>
+								<#if problem_select?? && problem_select.answer=='C'>
+								<option value="C" selected="selected">C</option>
+								<#else>
+								<option value="C">C</option>
+								</#if>
+								<#if problem_select?? && problem_select.answer=='D'>
+								<option value="D" selected="selected">D</option>
+								<#else>
+								<option value="D">D</option>
+								</#if>
+							</select>
+							</td>
+						</tr>
+						<tr>
+							<td  style="width: 150px;text-align: right;  vertical-align: top;">答案解析：</td>
+							<td><textarea name="problem_select.explan" cols="100" rows="3">${(problem_select.explan)!}</textarea><td>
+						</tr>
+						</table>
+					</div>
+					<div>
+						<table class="searchContent">
+						<tr>			
+							<td style="width: 150px;text-align: right;">题目名：</td>
+							<td><input name="problem_judge.title" class="" type="text" size="30" value="${(problem_judge.title)!}"/></td>
+							<input name="problem_judge.id" type="hidden" value="${(problem_judge.id)!}"/>
+						</tr>
+						<tr>
+							<td style="width: 150px; text-align: right; vertical-align: top;">题目正文：</td>
+							<td><textarea name="problem_judge.main_body" class="editor" tools="simple" type="text" cols="100" rows="10" >${(problem_judge.main_body)!}</textarea></td>
+						</tr>
+						<tr>
+							<td  style="width: 150px;text-align: right;">答案：</td>
+							<td>
+							<select name="problem_judge.answer" class="combox">
+								<option value="">请选择答案</option>
+								<#if problem_judge?? && problem_judge.answer=='1'>
+								<option value="1" selected="selected">对</option>
+								<#else>
+								<option value="1">对</option>
+								</#if>
+								<#if problem_judge?? && problem_judge.answer=='0'>
+								<option value="0" selected="selected">错</option>
+								<#else>
+								<option value="0">错</option>
+								</#if>
+							</select>
+							</td>
+						</tr>
+						<tr>
+							<td  style="width: 150px;text-align: right;  vertical-align: top;">答案解析：</td>
+							<td><textarea name="problem_judge.explan" cols="100" rows="3">${(problem_judge.explan)!}</textarea><td>
+						</tr>
+						</table>
+					</div>
+				</div>
+				<div class="tabsFooter">
+					<div class="tabsFooterContent"></div>
+				</div>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li> 
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
